@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload de Planilha AD</title>
+    <link rel="stylesheet" href="/frontend/style.css">
+    <script src="/frontend/script.js"></script>
+
+
+</head>
+<body>
+    <div class="container">
+        <h1>Upload de Planilha de Usuários</h1>
+
+        <!-- Formulário para enviar o arquivo -->
+         <form id="form-upload" action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" id="arquivo" name="arquivo" accept=".xlsx" required>
+            <button id="btnEnviar" type="submit">Enviar Planilha</button>
+        </form>
+
+
+        <p id="mensagem"></p>
+    </div>
+
+</body>
+</html>

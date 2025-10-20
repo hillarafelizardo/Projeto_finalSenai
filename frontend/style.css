@@ -1,0 +1,77 @@
+/* Estilo básico do site */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container principal */
+.container {
+    max-width: 600px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    margin: 80px auto;
+    text-align: center;
+}
+
+/* Título */
+h1 {
+    color: #004aad;
+    margin-bottom: 10px;
+}
+
+/* Parágrafo inicial */
+p {
+    margin-bottom: 20px;
+}
+
+/* Input de arquivo */
+input[type="file"] {
+    border: 2px dashed #004aad;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #f9fafb;
+    transition: background 0.3s;
+}
+
+input[type="file"]:hover {
+    background-color: #eef2ff;
+}
+
+/* Botão */
+button {
+    margin-top: 20px;
+    background-color: #004aad;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #003b8e;
+    transform: scale(1.03);
+}
+
+/* Mensagem de retorno */
+#mensagem {
+    margin-top: 25px;
+    font-weight: bold;
+}
+
+#mensagem.sucesso {
+    color: #0f5132;
+}
+
+#mensagem.erro {
+    color: #842029;
+}

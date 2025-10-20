@@ -1,0 +1,29 @@
+{
+  "job_id": "599758f0-e234-46db-8432-8e5b9c39ff83",
+  "registros": [
+    {
+      "nome": "Hillara Felizardo",
+      "cpf": "14268490809",
+      "inicio": "2025-10-06",
+      "fim": "2025-11-21",
+      "operation": "scheduled_disable",
+      "username": "14268490809"
+    },
+    {
+      "nome": "Julia Gregorio",
+      "cpf": "26849790879",
+      "inicio": "2025-09-01",
+      "fim": "2025-11-21",
+      "operation": "scheduled_disable",
+      "username": "26849790879"
+    },
+    {
+      "nome": "Pedro Guilherme",
+      "cpf": "16493659704",
+      "inicio": "2025-11-10",
+      "fim": "2025-12-20",
+      "operation": "scheduled_disable",
+      "username": "16493659704"
+    }
+  ]
+}
