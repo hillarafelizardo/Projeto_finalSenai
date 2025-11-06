@@ -5,7 +5,7 @@ const btnEnviar = document.getElementById("btnEnviar");
 
 // URL do backend: troque localhost pelo IP do servidor se necessário
 // Ex.: const BACKEND_URL = "http://192.168.0.10:5000";
-const BACKEND_URL = "http://127.0.0.1:5500"; // deixar localhost para testes na mesma máquina
+const BACKEND_URL = "http://192.168.10.10:5000"; // deixar localhost para testes na mesma máquina
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault(); // Evita reload

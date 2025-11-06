@@ -1,24 +1,12 @@
-param (
-    [string]$FilePath
-)
+# Caminho fixo do arquivo JSON
+$FilePath = "C:\Projeto_finalSenai\backend\uploads\usuarios.json"
 
-if (-not $FilePath) {
-    $folder = "C:\backend\uploads"
-    # Pega o arquivo mais recente que comece com 'usuarios' e termine com '.json'
-    $jsonFile = Get-ChildItem -Path $folder -Filter "usuarios*.json" |
-        Sort-Object LastWriteTime -Descending |
-        Select-Object -First 1
-
-    if (-not $jsonFile) {
-        Write-Error "Nenhum arquivo de usu√°rios encontrado em $folder"
-        exit 1
-    }
-
-    $FilePath = $jsonFile.FullName
-    Write-Host "üìÇ Usando arquivo mais recente: $FilePath"
+if (-not (Test-Path $FilePath)) {
+    Write-Error "Arquivo usuarios.json n„o encontrado em $FilePath"
+    exit 1
 }
 
-
+# FunÁ„o para log
 function Write-Log {
     param([string]$Message)
     $timestamp = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
@@ -27,21 +15,16 @@ function Write-Log {
 
 Write-Log "Iniciando processamento do arquivo JSON: $FilePath"
 
-if (-not (Test-Path $FilePath)) {
-    Write-Error "Arquivo JSON n√£o encontrado: $FilePath"
-    exit 1
-}
-
-# Importa m√≥dulo AD
+# Importa mÛdulo AD
 try {
     Import-Module ActiveDirectory -ErrorAction Stop
-    Write-Log "M√≥dulo ActiveDirectory importado com sucesso."
+    Write-Log "MÛdulo ActiveDirectory importado com sucesso."
 } catch {
-    Write-Error "Falha ao importar m√≥dulo ActiveDirectory."
+    Write-Error "Falha ao importar mÛdulo ActiveDirectory: $_"
     exit 1
 }
 
-# L√™ JSON
+# LÍ JSON
 try {
     $data = Get-Content -Path $FilePath -Raw | ConvertFrom-Json
     $usuarios = $data.registros
@@ -60,28 +43,32 @@ foreach ($u in $usuarios) {
     $fim = if ($u.fim) { [datetime]$u.fim } else { $null }
 
     Write-Log "---------------------------------------------"
-    Write-Log "Usu√°rio: $nome ($usuario)"
-    Write-Log "Data in√≠cio: $inicio | Data final: $fim"
+    Write-Log "Usu·rio: $nome ($usuario)"
+    Write-Log "Data inÌcio: $inicio | Data final: $fim"
 
-    $existe = Get-ADUser -Filter "SamAccountName -eq '$usuario'" -ErrorAction SilentlyContinue
+    try {
+        $filter = "SamAccountName -eq `"$usuario`""
+        $existe = Get-ADUser -Filter $filter -ErrorAction SilentlyContinue
+    } catch {
+        Write-Error "Erro ao consultar usu·rio ${usuario}: $_"
+        continue
+    }
 
-    # DELETE autom√°tico se data final atingida
     if ($fim -and $hoje -ge $fim) {
         if ($existe) {
             Write-Log "Excluindo conta (data final atingida)..."
             try {
                 Remove-ADUser -Identity $usuario -Confirm:$false
-                Write-Log "Conta exclu√≠da com sucesso!"
+                Write-Log "Conta excluÌda com sucesso!"
             } catch {
-                Write-Error "Erro ao excluir usu√°rio $usuario: $_"
+                Write-Error "Erro ao excluir usu·rio ${usuario}: $_"
             }
         } else {
-            Write-Log "Usu√°rio n√£o encontrado no AD para exclus√£o."
+            Write-Log "Usu·rio n„o encontrado no AD para exclus„o."
         }
         continue
     }
 
-    # CREATE autom√°tico na data de in√≠cio
     if ($hoje -ge $inicio -and -not $existe) {
         Write-Log "Criando conta no AD..."
         try {
@@ -95,14 +82,14 @@ foreach ($u in $usuarios) {
                 -Path "OU=OUusers,DC=senai,DC=local"
             Write-Log "Conta criada com sucesso!"
         } catch {
-            Write-Error "Erro ao criar usu√°rio $usuario: $_"
+            Write-Error "Erro ao criar usu·rio ${usuario}: $_"
         }
     } elseif ($existe) {
-        Write-Log "Usu√°rio j√° existe. Nenhuma a√ß√£o necess√°ria."
+        Write-Log "Usu·rio j· existe. Nenhuma aÁ„o necess·ria."
     } else {
-        Write-Log "Usu√°rio ainda n√£o deve ser criado (antes da data de in√≠cio)."
+        Write-Log "Usu·rio ainda n„o deve ser criado (antes da data de inÌcio)."
     }
 }
 
-Write-Log "Processamento conclu√≠do."
+Write-Log "Processamento concluÌdo."
 exit 0
