@@ -1,13 +1,47 @@
-/* Estilo básico do site */
+/* ======== ESTILO GERAL ======== */
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f3f4f6;
+    background-color: #f8f8f8;
     color: #333;
     margin: 0;
-    padding: 0;
 }
 
-/* Container principal */
+/* ======== TOPO ======== */
+.topo {
+    background-color: #a90f0f;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 40px;
+}
+
+.topo-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-lintrix {
+    height: 45px;
+}
+
+.btn-users {
+    background-color: white;
+    color: #d70000;
+    border: 2px solid #fff;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-users:hover {
+    background-color: #f2f2f2;
+}
+
+/* ======== CONTEÚDO PRINCIPAL ======== */
 .container {
     max-width: 600px;
     background: #fff;
@@ -18,36 +52,38 @@ body {
     text-align: center;
 }
 
-/* Título */
 h1 {
-    color: #004aad;
+    color: #b30000;
     margin-bottom: 10px;
 }
 
-/* Parágrafo inicial */
-p {
-    margin-bottom: 20px;
-}
-
-/* Input de arquivo */
+/* ======== INPUT & BOTÃO ======== */
 input[type="file"] {
-    border: 2px dashed #004aad;
+    border: 2px dashed #b30000;
     padding: 15px;
     width: 100%;
     border-radius: 10px;
+    background-color: #fff5f5;
     cursor: pointer;
-    background-color: #f9fafb;
-    transition: background 0.3s;
 }
 
-input[type="file"]:hover {
-    background-color: #eef2ff;
+input[type="file"] {
+    border: 2px dashed #b30000;
+    padding: 15px;
+    width: 85%;
+    border-radius: 10px;
+    background-color: #fff5f5;
+    cursor: pointer;
+    text-align: left;
+    display: block;
+    margin-left: 25px; /* AQUI VOCÊ AJUSTA — mais alto = mais pra direita */
 }
 
-/* Botão */
+
+
 button {
     margin-top: 20px;
-    background-color: #004aad;
+    background-color: #d70000;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -58,20 +94,125 @@ button {
 }
 
 button:hover {
-    background-color: #003b8e;
+    background-color: #b30000;
     transform: scale(1.03);
 }
 
-/* Mensagem de retorno */
-#mensagem {
+/* ======== MENSAGENS ======== */
+.mensagem-box {
     margin-top: 25px;
     font-weight: bold;
+    white-space: pre-wrap;
+    display: none;
 }
 
-#mensagem.sucesso {
+.mensagem-box.sucesso {
+    display: block;
     color: #0f5132;
+    background-color: #d1e7dd;
+    border-left: 5px solid #0f5132;
+    padding: 10px 15px;
+    border-radius: 8px;
 }
 
-#mensagem.erro {
+.mensagem-box.erro {
+    display: block;
     color: #842029;
+    background-color: #f8d7da;
+    border-left: 5px solid #842029;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+/* ======== MODAL ======== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-conteudo {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.fechar {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.fechar:hover {
+    color: #000;
+}
+/* Campo de pesquisa */
+.campo-pesquisa {
+    width: 100%;
+    padding: 12px 1px;
+    margin: 15px 0 25px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s ease-in-out;
+}
+
+.campo-pesquisa:focus {
+    outline: none;
+    border-color: #b30000;
+    box-shadow: 0 0 6px rgba(179, 0, 0, 0.3);
+}
+
+/* Tabela de usuários */
+.tabela-usuarios {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+.tabela-usuarios th, 
+.tabela-usuarios td {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.tabela-usuarios th {
+    background-color: #b30000;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.tabela-usuarios tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.tabela-usuarios tr:hover {
+    background-color: #ffe5e5;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .tabela-usuarios th, 
+    .tabela-usuarios td {
+        font-size: 13px;
+        padding: 8px;
+    }
 }

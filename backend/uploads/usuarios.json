@@ -4,25 +4,71 @@
       "nome": "Hillara Felizardo",
       "cpf": "14268490809",
       "inicio": "2025-10-06",
-      "fim": "2025-11-21",
-      "operation": "scheduled_disable",
-      "username": "14268490809"
+      "fim": "2025-11-07",
+      "operation": "disable",
+      "primeiro_nome": "hillara",
+      "ultimo_nome": "felizardo",
+      "username": "hillara.felizardo"
     },
     {
       "nome": "Julia Gregorio",
       "cpf": "26849790879",
       "inicio": "2025-09-01",
-      "fim": "2025-11-21",
-      "operation": "scheduled_disable",
-      "username": "26849790879"
+      "fim": "2025-11-08",
+      "operation": "disable",
+      "primeiro_nome": "julia",
+      "ultimo_nome": "gregorio",
+      "username": "julia.gregorio"
     },
     {
       "nome": "Pedro Guilherme",
       "cpf": "16493659704",
-      "inicio": "2025-11-10",
+      "inicio": "2025-11-08",
       "fim": "2025-12-20",
       "operation": "scheduled_disable",
-      "username": "16493659704"
+      "primeiro_nome": "pedro",
+      "ultimo_nome": "guilherme",
+      "username": "pedro.guilherme"
+    },
+    {
+      "nome": "Gabriela Cintia Pastos",
+      "cpf": "56384679525",
+      "inicio": "2025-11-12",
+      "fim": "2025-11-14",
+      "operation": "scheduled_disable",
+      "primeiro_nome": "gabriela",
+      "ultimo_nome": "pastos",
+      "username": "gabriela.pastos"
+    },
+    {
+      "nome": "Juliana Patrico Star",
+      "cpf": "46957813526",
+      "inicio": "2025-11-14",
+      "fim": "2025-11-20",
+      "operation": "scheduled_disable",
+      "primeiro_nome": "juliana",
+      "ultimo_nome": "star",
+      "username": "juliana.star"
+    },
+    {
+      "nome": "Paulo Gasp Mano",
+      "cpf": "97568425912",
+      "inicio": "2025-11-13",
+      "fim": "2025-11-17",
+      "operation": "scheduled_disable",
+      "primeiro_nome": "paulo",
+      "ultimo_nome": "mano",
+      "username": "paulo.mano"
+    },
+    {
+      "nome": "Larissa Mark Brown",
+      "cpf": "42659451366",
+      "inicio": "2025-11-12",
+      "fim": "2025-11-18",
+      "operation": "scheduled_disable",
+      "primeiro_nome": "larissa",
+      "ultimo_nome": "brown",
+      "username": "larissa.brown"
     }
   ]
 }

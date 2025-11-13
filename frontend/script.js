@@ -1,3 +1,8 @@
+// Impede acesso direto sem login
+if (localStorage.getItem("autenticado") !== "true") {
+    window.location.href = "login.html";
+}
+
 // Captura os elementos do DOM
 const form = document.getElementById("form-upload");
 const mensagem = document.getElementById("mensagem");
@@ -13,7 +18,7 @@ form.addEventListener("submit", async (e) => {
     const arquivo = document.getElementById("arquivo").files[0];
 
     if (!arquivo) {
-        mensagem.textContent = "⚠️ Por favor, selecione uma planilha antes de enviar.";
+        mensagem.textContent = "! Por favor, selecione uma planilha antes de enviar!";
         mensagem.className = "erro";
         return;
     }
@@ -42,10 +47,10 @@ form.addEventListener("submit", async (e) => {
             throw new Error(resultado.mensagem || `Status ${resposta.status}`);
         }
 
-        mensagem.textContent = "✅ " + (resultado.message || "Upload realizado com sucesso.");
+        mensagem.textContent = "OK " + (resultado.message || "Upload realizado com sucesso.");
         mensagem.className = "sucesso";
     } catch (erro) {
-        mensagem.textContent = "❌ Erro: " + erro.message;
+        mensagem.textContent = " Erro: " + erro.message;
         mensagem.className = "erro";
         console.error("Erro no upload:", erro);
     } finally {
@@ -53,3 +58,68 @@ form.addEventListener("submit", async (e) => {
         btnEnviar.textContent = "Enviar Planilha";
     }
 });
+// ==== MODAL DE USUÁRIOS CRIADOS ====
+const btnUsers = document.getElementById("btnUsers");
+const modalUsers = document.getElementById("modalUsers");
+const fecharModal = document.getElementById("fecharModal");
+const filtroUsuario = document.getElementById("filtroUsuario");
+const usuariosCorpo = document.getElementById("usuariosCorpo");
+
+btnUsers.addEventListener("click", async () => {
+  modalUsers.style.display = "block";
+  await carregarUsuarios();
+});
+
+fecharModal.addEventListener("click", () => {
+  modalUsers.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target === modalUsers) {
+    modalUsers.style.display = "none";
+  }
+});
+
+async function carregarUsuarios() {
+  try {
+    const resp = await fetch(`${BACKEND_URL}/uploads/usuarios.json`);
+    if (!resp.ok) throw new Error("Erro ao buscar usuários");
+    const dados = await resp.json();
+    preencherTabela(dados.registros);
+  } catch (erro) {
+    usuariosCorpo.innerHTML = `<tr><td colspan="5">Erro ao carregar: ${erro.message}</td></tr>`;
+  }
+}
+
+function preencherTabela(lista) {
+  if (!lista || lista.length === 0) {
+    usuariosCorpo.innerHTML = "<tr><td colspan='5'>Nenhum usuário encontrado</td></tr>";
+    return;
+  }
+
+  usuariosCorpo.innerHTML = lista.map(u => `
+    <tr>
+      <td>${u.nome}</td>
+      <td>${u.username}</td>
+      <td>${u.inicio || '-'}</td>
+      <td>${u.fim || '-'}</td>
+      <td>${u.operation === "create" ? " Criado" :
+           u.operation === "disable" ? " Desativado" :
+           " Agendado"}</td>
+    </tr>
+  `).join("");
+}
+
+filtroUsuario.addEventListener("input", () => {
+  const termo = filtroUsuario.value.toLowerCase();
+  const linhas = usuariosCorpo.getElementsByTagName("tr");
+
+  for (let linha of linhas) {
+    const texto = linha.innerText.toLowerCase();
+    linha.style.display = texto.includes(termo) ? "" : "none";
+  }
+});
+function logout() {
+    localStorage.removeItem("autenticado");
+    window.location.href = "login.html";
+}

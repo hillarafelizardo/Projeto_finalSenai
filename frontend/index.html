@@ -4,23 +4,58 @@
     <meta charset="UTF-8">
     <title>Upload de Planilha AD</title>
     <link rel="stylesheet" href="/frontend/style.css">
-    <script src="/frontend/script.js"></script>
-
-
+    <script src="/frontend/script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Upload de Planilha de Usuários</h1>
+    <header class="topo">
+        <div class="topo-esquerda">
+            <img src="/frontend/imgs/lintrix-logo.jpeg" alt="Logo LINTRIX" class="logo-lintrix"> <!-- baixar a imagem -->
+            <h2>Gerenciamento Usuários do AD</h2>
+        </div>
+        <button id="btnUsers" class="btn-users">Usuários Criados</button>
+	<button onclick="logout()" class="btn-users">Sair</button>
 
-        <!-- Formulário para enviar o arquivo -->
-         <form id="form-upload" action="/upload" method="POST" enctype="multipart/form-data">
+    </header>
+
+    <div class="container">
+        <h1>Planilha de Usuários</h1>
+
+        <form id="form-upload" action="/upload" method="POST" enctype="multipart/form-data">
             <input type="file" id="arquivo" name="arquivo" accept=".xlsx" required>
             <button id="btnEnviar" type="submit">Enviar Planilha</button>
         </form>
 
-
-        <p id="mensagem"></p>
+        <div id="mensagem" class="mensagem-box"></div>
     </div>
+    <!-- Modal de usuários criados -->
+     <div id="modalUsers" class="modal">
+        <div class="modal-conteudo">
+            <span id="fecharModal" class="fechar">&times;</span>
+            <h2>Usuários Criados</h2>
+            
+            <input 
+            type="text" 
+            id="filtroUsuario" 
+            placeholder=" Pesquisar usuário pelo nome ou CPF..."
+            class="campo-pesquisa"
+        >
+
+        <table id="tabelaUsuarios" class="tabela-usuarios">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Usuário</th>
+                    <th>Data Início</th>
+                    <th>Data Fim</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="usuariosCorpo">
+                <tr><td colspan="5">Nenhum registro carregado</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

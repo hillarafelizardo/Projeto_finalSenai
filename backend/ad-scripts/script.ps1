@@ -78,7 +78,7 @@ foreach ($u in $usuarios) {
                 -UserPrincipalName "$usuario@senai.local" `
                 -AccountPassword (ConvertTo-SecureString "Senha@134" -AsPlainText -Force) `
                 -Enabled $true `
-                -ChangePasswordAtLogon $false `
+                -ChangePasswordAtLogon $true `
                 -Path "OU=OUusers,DC=senai,DC=local"
             Write-Log "Conta criada com sucesso!"
         } catch {
